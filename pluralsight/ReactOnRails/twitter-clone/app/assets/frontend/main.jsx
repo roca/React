@@ -1,11 +1,33 @@
-import React from "react";
+import TweetBox from "./components/TweetBox";
+import TweetList from "./components/TweetList";
 
-import Greet from './greet.jsx';
+
+// let mockTweets = [
+//   {id: 1, name: 'Robert', body: 'first tweet'},
+//   {id: 2, name: 'Yelena', body: 'first tweet'},
+//   {id: 3, name: 'Liya',   body: 'first tweet'},
+//   {id: 4, name: 'Steve',  body: 'first tweet'},
+//   {id: 5, name: 'John',   body: 'first tweet'},
+//   {id: 6, name: 'Romel',  body: 'first tweet'}
+// ]
 
 class Main extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {tweetList: []};
+  }
+  addTweet(tweetToAdd){
+      let newTweetList = this.state.tweetList;
+      newTweetList.unshift({id: Date.now(), name: 'Guest',body: tweetToAdd});
+
+      this.setState({tweetList: newTweetList});
+  }
   render() {
     return (
-      `<Greet />`
+      <div className="container">
+        <TweetBox sendTweet={this.addTweet.bind(this)} />
+        <TweetList tweets={this.state.tweetList} />
+      </div>
     );
   }
 }
@@ -14,8 +36,8 @@ class Main extends React.Component {
 
 
 let documentReady = () => {
-   React.render (
-     `<Main />`,
+   ReactDOM.render (
+     <Main />,
        document.getElementById('react')
    );
 };

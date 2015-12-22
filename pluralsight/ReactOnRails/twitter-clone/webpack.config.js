@@ -8,12 +8,21 @@ module.exports = {
       extensions: ['','.js','.jsx']
     },
     module: {
+
       loaders: [
+
         {
-          test: /\.jsx?$/,
-          exclude: /(node_modules|bower_components)/,
-          loader: 'babel-loader' // 'babel-loader' is also a legal name to reference
+          test: /\.jsx$/,
+          exclude: /node_modules/,
+          loader: 'babel',
+          query: {
+            presets: ['es2015','react']
+          }
         }
       ]
     }
+
+
+
+
 };
