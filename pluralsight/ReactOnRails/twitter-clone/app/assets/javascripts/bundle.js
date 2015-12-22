@@ -55,9 +55,9 @@
 	
 	var _TweetBox2 = _interopRequireDefault(_TweetBox);
 	
-	var _TweetList = __webpack_require__(/*! ./components/TweetList */ 2);
+	var _TweetsList = __webpack_require__(/*! ./components/TweetsList */ 2);
 	
-	var _TweetList2 = _interopRequireDefault(_TweetList);
+	var _TweetsList2 = _interopRequireDefault(_TweetsList);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -84,17 +84,45 @@
 	
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Main).call(this, props));
 	
-	    _this.state = { tweetList: [] };
+	    _this.state = { tweetsList: [] };
 	    return _this;
 	  }
 	
 	  _createClass(Main, [{
+	    key: "formattedTweets",
+	    value: function formattedTweets(tweetsList) {
+	      var formattedList = tweetsList.map(function (tweet) {
+	        tweet.formattedDate = moment(tweet.created_at).fromNow();
+	        return tweet;
+	      });
+	      return {
+	        tweetsList: formattedList
+	      };
+	    }
+	  }, {
 	    key: "addTweet",
 	    value: function addTweet(tweetToAdd) {
-	      var newTweetList = this.state.tweetList;
-	      newTweetList.unshift({ id: Date.now(), name: 'Guest', body: tweetToAdd });
+	      var _this2 = this;
 	
-	      this.setState({ tweetList: newTweetList });
+	      $.post("/tweets", { body: tweetToAdd }).success(function (savedTweet) {
+	        var newTweetsList = _this2.state.tweetsList;
+	        newTweetsList.unshift(savedTweet);
+	
+	        _this2.setState(_this2.formattedTweets(newTweetsList));
+	      }).error(function (error) {
+	        return console.log(error);
+	      });
+	    }
+	  }, {
+	    key: "componentDidMount",
+	    value: function componentDidMount() {
+	      var _this3 = this;
+	
+	      $.ajax("/tweets").success(function (data) {
+	        return _this3.setState(_this3.formattedTweets(data));
+	      }).error(function (error) {
+	        return console.log(error);
+	      });
 	    }
 	  }, {
 	    key: "render",
@@ -103,7 +131,7 @@
 	        "div",
 	        { className: "container" },
 	        React.createElement(_TweetBox2.default, { sendTweet: this.addTweet.bind(this) }),
-	        React.createElement(_TweetList2.default, { tweets: this.state.tweetList })
+	        React.createElement(_TweetsList2.default, { tweets: this.state.tweetsList })
 	      );
 	    }
 	  }]);
@@ -193,9 +221,9 @@
 
 /***/ },
 /* 2 */
-/*!******************************************************!*\
-  !*** ./app/assets/frontend/components/TweetList.jsx ***!
-  \******************************************************/
+/*!*******************************************************!*\
+  !*** ./app/assets/frontend/components/TweetsList.jsx ***!
+  \*******************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -220,16 +248,16 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var TweetList = (function (_React$Component) {
-	  _inherits(TweetList, _React$Component);
+	var TweetsList = (function (_React$Component) {
+	  _inherits(TweetsList, _React$Component);
 	
-	  function TweetList() {
-	    _classCallCheck(this, TweetList);
+	  function TweetsList() {
+	    _classCallCheck(this, TweetsList);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(TweetList).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(TweetsList).apply(this, arguments));
 	  }
 	
-	  _createClass(TweetList, [{
+	  _createClass(TweetsList, [{
 	    key: "render",
 	    value: function render() {
 	      var tweets = this.props.tweets.map(function (tweet) {
@@ -247,10 +275,10 @@
 	    }
 	  }]);
 	
-	  return TweetList;
+	  return TweetsList;
 	})(React.Component);
 	
-	exports.default = TweetList;
+	exports.default = TweetsList;
 
 /***/ },
 /* 3 */
@@ -288,21 +316,20 @@
 	      return React.createElement(
 	        "li",
 	        { className: "collection-item avatar" },
-	        React.createElement(
-	          "i",
-	          { className: "material-icons circle" },
-	          "person-pin"
-	        ),
+	        React.createElement("img", { className: "circle", src: this.props.gravatar }),
 	        React.createElement(
 	          "span",
 	          { className: "title" },
 	          this.props.name
 	        ),
 	        React.createElement(
+	          "time",
+	          null,
+	          this.props.formattedDate
+	        ),
+	        React.createElement(
 	          "p",
 	          null,
-	          this.props.name,
-	          "s ",
 	          this.props.body
 	        )
 	      );
