@@ -264,6 +264,20 @@
 	    }).error(function (error) {
 	      return console.log(error);
 	    });
+	  },
+	  getAllUsers: function getAllUsers() {
+	    $.get("/followers/random").success(function (rawUsers) {
+	      return _ServerActions2.default.receivedUsers(rawUsers);
+	    }).error(function (error) {
+	      return console.log(error);
+	    });
+	  },
+	  followUser: function followUser(userId) {
+	    $.post("/followers", { user_id: userId }).success(function (rawFollower) {
+	      return _ServerActions2.default.receivedOneFollower(rawFollower);
+	    }).error(function (error) {
+	      return console.log(error);
+	    });
 	  }
 	};
 
@@ -303,6 +317,18 @@
 	    _dispatcher2.default.dispatch({
 	      actionType: _constants2.default.RECEIVED_ONE_TWEET,
 	      rawTweet: rawTweet
+	    });
+	  },
+	  receivedUsers: function receivedUsers(rawUsers) {
+	    _dispatcher2.default.dispatch({
+	      actionType: _constants2.default.RECEIVED_USERS,
+	      rawUsers: rawUsers
+	    });
+	  },
+	  receivedOneFollower: function receivedOneFollower(rawFollower) {
+	    _dispatcher2.default.dispatch({
+	      actionType: _constants2.default.RECEIVED_ONE_FOLLOWER,
+	      rawFollower: rawFollower
 	    });
 	  }
 	};
@@ -759,7 +785,9 @@
 	});
 	exports.default = {
 	  RECEIVED_TWEETS: 'RECEIVED_TWEETS',
-	  RECEIVED_ONE_TWEET: 'RECEIVED_ONE_TWEET'
+	  RECEIVED_ONE_TWEET: 'RECEIVED_ONE_TWEET',
+	  RECEIVED_USERS: 'RECEIVED_USERS',
+	  RECEIVED_FOLLOWER: 'RECEIVED_ONE_FOLLOWER'
 	};
 
 /***/ },
@@ -917,7 +945,9 @@
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
-	var _events = __webpack_require__(/*! events */ 14);
+	var _AppEventEmitter2 = __webpack_require__(/*! ./AppEventEmitter */ 226);
+	
+	var _AppEventEmitter3 = _interopRequireDefault(_AppEventEmitter2);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -928,10 +958,9 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var _tweets = [];
-	var CHANGE_EVENT = "CHANGE";
 	
-	var TweetEventEmitter = (function (_EventEmitter) {
-	  _inherits(TweetEventEmitter, _EventEmitter);
+	var TweetEventEmitter = (function (_AppEventEmitter) {
+	  _inherits(TweetEventEmitter, _AppEventEmitter);
 	
 	  function TweetEventEmitter() {
 	    _classCallCheck(this, TweetEventEmitter);
@@ -947,25 +976,10 @@
 	        return tweet;
 	      });
 	    }
-	  }, {
-	    key: "emitChange",
-	    value: function emitChange() {
-	      this.emit(CHANGE_EVENT);
-	    }
-	  }, {
-	    key: "addChangeListener",
-	    value: function addChangeListener(callback) {
-	      this.on(CHANGE_EVENT, callback);
-	    }
-	  }, {
-	    key: "removeChangeListener",
-	    value: function removeChangeListener(callback) {
-	      this.removeListener(CHANGE_EVENT, callback);
-	    }
 	  }]);
 	
 	  return TweetEventEmitter;
-	})(_events.EventEmitter);
+	})(_AppEventEmitter3.default);
 	
 	var TweetStore = new TweetEventEmitter();
 	
@@ -1337,8 +1351,6 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	_TweetActions2.default.getAllTweets();
-	
 	// let mockTweets = [
 	//   {id: 1, name: 'Robert', body: 'first tweet'},
 	//   {id: 2, name: 'Yelena', body: 'first tweet'},
@@ -1371,7 +1383,7 @@
 	      // $.ajax("/tweets")
 	      // .success(data => this.setState(this.formattedTweets(data)))
 	      // .error(error => console.log(error));
-	
+	      _TweetActions2.default.getAllTweets();
 	      _TweetStore2.default.addChangeListener(this._onChange);
 	    }
 	  }, {
@@ -26306,6 +26318,16 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _UserStore = __webpack_require__(/*! ../stores/UserStore */ 225);
+	
+	var _UserStore2 = _interopRequireDefault(_UserStore);
+	
+	var _UserActions = __webpack_require__(/*! ../actions/UserActions */ 227);
+	
+	var _UserActions2 = _interopRequireDefault(_UserActions);
+	
+	var _reactRouter = __webpack_require__(/*! react-router */ 173);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26314,25 +26336,94 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	var getAppState = function getAppState() {
+	  return { users: _UserStore2.default.getAll() };
+	};
+	
 	var Follow = (function (_React$Component) {
 	  _inherits(Follow, _React$Component);
 	
-	  function Follow() {
+	  function Follow(props) {
 	    _classCallCheck(this, Follow);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Follow).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Follow).call(this, props));
+	
+	    _this.state = getAppState();
+	    _this._onChange = _this._onChange.bind(_this);
+	    return _this;
 	  }
 	
 	  _createClass(Follow, [{
+	    key: "componentDidMount",
+	    value: function componentDidMount() {
+	      _UserActions2.default.getAllUsers();
+	      _UserStore2.default.addChangeListener(this._onChange);
+	    }
+	  }, {
+	    key: "componentWillUnmount",
+	    value: function componentWillUnmount() {
+	      _UserStore2.default.removeChangeListener(this._onChange);
+	    }
+	  }, {
+	    key: "_onChange",
+	    value: function _onChange() {
+	      this.setState(getAppState());
+	    }
+	  }, {
+	    key: "followUser",
+	    value: function followUser(userId) {
+	      _UserActions2.default.followUser(userId);
+	    }
+	  }, {
+	    key: "followClasses",
+	    value: function followClasses(following) {
+	      console.log(following);
+	      return "secondary-content btn-floating " + (following ? "green" : "grey");
+	    }
+	  }, {
 	    key: "render",
 	    value: function render() {
+	      var _this2 = this;
+	
+	      var users = this.state.users.map(function (user) {
+	        return _react2.default.createElement(
+	          "li",
+	          { key: user.id, className: "collection-item avatar" },
+	          _react2.default.createElement("img", { src: user.gravatar, className: "circle" }),
+	          _react2.default.createElement(
+	            "span",
+	            { className: "title" },
+	            user.name
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: _this2.followClasses(user.following),
+	              onClick: _this2.followUser.bind(_this2, user.id) },
+	            _react2.default.createElement(
+	              "i",
+	              { className: "material-icons" },
+	              "person_pin"
+	            )
+	          )
+	        );
+	      });
 	      return _react2.default.createElement(
 	        "div",
 	        null,
 	        _react2.default.createElement(
 	          "h3",
 	          null,
-	          "Who to folow"
+	          "Who to follow"
+	        ),
+	        _react2.default.createElement(
+	          "ul",
+	          { className: "collection" },
+	          users
+	        ),
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: "/" },
+	          "Back"
 	        )
 	      );
 	    }
@@ -26342,6 +26433,168 @@
 	})(_react2.default.Component);
 	
 	exports.default = Follow;
+
+/***/ },
+/* 225 */
+/*!**************************************************!*\
+  !*** ./app/assets/frontend/stores/UserStore.jsx ***!
+  \**************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _dispatcher = __webpack_require__(/*! ../dispatcher */ 5);
+	
+	var _dispatcher2 = _interopRequireDefault(_dispatcher);
+	
+	var _constants = __webpack_require__(/*! ../constants */ 10);
+	
+	var _constants2 = _interopRequireDefault(_constants);
+	
+	var _AppEventEmitter2 = __webpack_require__(/*! ./AppEventEmitter */ 226);
+	
+	var _AppEventEmitter3 = _interopRequireDefault(_AppEventEmitter2);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var _users = [];
+	var _followedIds = [];
+	
+	var UserEventEmitter = (function (_AppEventEmitter) {
+	  _inherits(UserEventEmitter, _AppEventEmitter);
+	
+	  function UserEventEmitter() {
+	    _classCallCheck(this, UserEventEmitter);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(UserEventEmitter).apply(this, arguments));
+	  }
+	
+	  _createClass(UserEventEmitter, [{
+	    key: "getAll",
+	    value: function getAll() {
+	      return _users.map(function (user) {
+	        user.following = _followedIds.indexOf(user.id) >= 0;
+	        return user;
+	      });
+	    }
+	  }]);
+	
+	  return UserEventEmitter;
+	})(_AppEventEmitter3.default);
+	
+	var UserStore = new UserEventEmitter();
+	
+	_dispatcher2.default.register(function (action) {
+	  switch (action.actionType) {
+	    case _constants2.default.RECEIVED_USERS:
+	      _users = action.rawUsers;
+	      UserStore.emitChange();
+	      break;
+	    case _constants2.default.RECEIVED_ONE_FOLLOWER:
+	      _followedIds.push(action.rawFollower.user_id);
+	      UserStore.emitChange();
+	      break;
+	    default:
+	  }
+	});
+	
+	exports.default = UserStore;
+
+/***/ },
+/* 226 */
+/*!********************************************************!*\
+  !*** ./app/assets/frontend/stores/AppEventEmitter.jsx ***!
+  \********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _events = __webpack_require__(/*! events */ 14);
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var CHANGE_EVENT = "CHANGE";
+	
+	var AppEventEmitter = (function (_EventEmitter) {
+	  _inherits(AppEventEmitter, _EventEmitter);
+	
+	  function AppEventEmitter() {
+	    _classCallCheck(this, AppEventEmitter);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(AppEventEmitter).apply(this, arguments));
+	  }
+	
+	  _createClass(AppEventEmitter, [{
+	    key: "emitChange",
+	    value: function emitChange() {
+	      this.emit(CHANGE_EVENT);
+	    }
+	  }, {
+	    key: "addChangeListener",
+	    value: function addChangeListener(callback) {
+	      this.on(CHANGE_EVENT, callback);
+	    }
+	  }, {
+	    key: "removeChangeListener",
+	    value: function removeChangeListener(callback) {
+	      this.removeListener(CHANGE_EVENT, callback);
+	    }
+	  }]);
+	
+	  return AppEventEmitter;
+	})(_events.EventEmitter);
+	
+	exports.default = AppEventEmitter;
+
+/***/ },
+/* 227 */
+/*!*****************************************************!*\
+  !*** ./app/assets/frontend/actions/UserActions.jsx ***!
+  \*****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _API = __webpack_require__(/*! ../API */ 3);
+	
+	var _API2 = _interopRequireDefault(_API);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	  getAllUsers: function getAllUsers() {
+	    _API2.default.getAllUsers();
+	  },
+	  followUser: function followUser(userId) {
+	    _API2.default.followUser(userId);
+	  }
+	};
 
 /***/ }
 /******/ ]);

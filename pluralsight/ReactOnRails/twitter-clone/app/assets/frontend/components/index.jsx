@@ -5,7 +5,7 @@ import TweetsList from "./TweetsList";
 import TweetStore from "../stores/TweetStore";
 
 import TweetActions from "../actions/TweetActions";
-TweetActions.getAllTweets();
+
 
 
 // let mockTweets = [
@@ -32,7 +32,7 @@ export default class Index extends React.Component {
     // $.ajax("/tweets")
     // .success(data => this.setState(this.formattedTweets(data)))
     // .error(error => console.log(error));
-
+    TweetActions.getAllTweets();
     TweetStore.addChangeListener(this._onChange);
   }
 
