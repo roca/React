@@ -2,16 +2,16 @@ import AppDispatcher from "../dispatcher"
 import ActionTypes from "../constants"
 
 export default {
-  receiveTweets(rawTweets) {
-    console.log(3,"ServerActions.receiveTweets");
+  receivedTweets(rawTweets) {
+    console.log(3,"ServerActions.receivedTweets");
       AppDispatcher.dispatch({
         actionType: ActionTypes.RECEIVED_TWEETS,
         rawTweets
       })
   },
 
-  receiveOneTweet(rawTweet){
-    console.log(7,"ServerActions.receiveOneTweet");
+  receivedOneTweet(rawTweet){
+    console.log(7,"ServerActions.receivedOneTweet");
       AppDispatcher.dispatch({
         actionType: ActionTypes.RECEIVED_ONE_TWEET,
         rawTweet

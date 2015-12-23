@@ -4,14 +4,14 @@ export default {
   getAllTweets() {
     console.log(2,"API.getAllTweets");
     $.get("/tweets")
-    .success(rawTweets => ServerActions.receiveTweets(rawTweets))
+    .success(rawTweets => ServerActions.receivedTweets(rawTweets))
     .error(error => console.log(error));
   },
 
   createTweet(body){
     console.log(6,"API.createTweet");
     $.post("/tweets",{body})
-    .success(rawTweet => ServerActions.receiveOneTweet(rawTweet))
+    .success(rawTweet => ServerActions.receivedOneTweet(rawTweet))
     .error(error => console.log(error));
 
   }

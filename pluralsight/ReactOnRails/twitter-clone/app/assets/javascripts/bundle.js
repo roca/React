@@ -277,7 +277,7 @@
 	  getAllTweets: function getAllTweets() {
 	    console.log(2, "API.getAllTweets");
 	    $.get("/tweets").success(function (rawTweets) {
-	      return _ServerActions2.default.receiveTweets(rawTweets);
+	      return _ServerActions2.default.receivedTweets(rawTweets);
 	    }).error(function (error) {
 	      return console.log(error);
 	    });
@@ -285,7 +285,7 @@
 	  createTweet: function createTweet(body) {
 	    console.log(6, "API.createTweet");
 	    $.post("/tweets", { body: body }).success(function (rawTweet) {
-	      return _ServerActions2.default.receiveOneTweet(rawTweet);
+	      return _ServerActions2.default.receivedOneTweet(rawTweet);
 	    }).error(function (error) {
 	      return console.log(error);
 	    });
@@ -316,15 +316,15 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = {
-	  receiveTweets: function receiveTweets(rawTweets) {
-	    console.log(3, "ServerActions.receiveTweets");
+	  receivedTweets: function receivedTweets(rawTweets) {
+	    console.log(3, "ServerActions.receivedTweets");
 	    _dispatcher2.default.dispatch({
 	      actionType: _constants2.default.RECEIVED_TWEETS,
 	      rawTweets: rawTweets
 	    });
 	  },
-	  receiveOneTweet: function receiveOneTweet(rawTweet) {
-	    console.log(7, "ServerActions.receiveOneTweet");
+	  receivedOneTweet: function receivedOneTweet(rawTweet) {
+	    console.log(7, "ServerActions.receivedOneTweet");
 	    _dispatcher2.default.dispatch({
 	      actionType: _constants2.default.RECEIVED_ONE_TWEET,
 	      rawTweet: rawTweet
