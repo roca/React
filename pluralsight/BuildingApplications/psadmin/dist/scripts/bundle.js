@@ -46593,18 +46593,20 @@ module.exports = AuthorPage;
 "use strict";
 
 var React = require('react');
+var Router = require('react-router');
+var Link = Router.Link;
 
 var Header = React.createClass({displayName: "Header",
   render: function() {
     return (React.createElement("nav", {className: "navbar navbar-default"}, 
               React.createElement("div", {className: "container-fluid"}, 
-                React.createElement("a", {href: "/", className: "navbar-brand"}, 
+                React.createElement(Link, {to: "app", className: "navbar-brand"}, 
                   React.createElement("img", {src: "images/pluralsight-logo.png"})
                 ), 
                 React.createElement("ul", {className: "nav navbar-nav"}, 
-                  React.createElement("li", null, React.createElement("a", {href: "/"}, "Home")), 
-                  React.createElement("li", null, React.createElement("a", {href: "/#authors"}, "Authors")), 
-                  React.createElement("li", null, React.createElement("a", {href: "/#about"}, "About"))
+                  React.createElement("li", null, React.createElement(Link, {to: "app"}, "Home")), 
+                  React.createElement("li", null, React.createElement(Link, {to: "authors"}, "Authors")), 
+                  React.createElement("li", null, React.createElement(Link, {to: "about"}, "About"))
                 )
               )
             ));
@@ -46613,10 +46615,12 @@ var Header = React.createClass({displayName: "Header",
 
 module.exports = Header;
 
-},{"react":198}],206:[function(require,module,exports){
+},{"react":198,"react-router":29}],206:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
+var Router = require('react-router');
+var Link = Router.Link;
 
 var Home = React.createClass({displayName: "Home",
 
@@ -46624,7 +46628,8 @@ var Home = React.createClass({displayName: "Home",
     return (
        React.createElement("div", {className: "jumbotron"}, 
          React.createElement("h1", null, "Pluralsight Administration"), 
-         React.createElement("p", null, "React, React Router, and Flux for ultra responsive web apps.")
+         React.createElement("p", null, "React, React Router, and Flux for ultra responsive web apps."), 
+         React.createElement(Link, {to: "about", className: "btn btn-primary btn-lg"}, "Learn more")
        )
     );
   }
@@ -46633,7 +46638,7 @@ var Home = React.createClass({displayName: "Home",
 
 module.exports = Home;
 
-},{"react":198}],207:[function(require,module,exports){
+},{"react":198,"react-router":29}],207:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -46656,7 +46661,7 @@ var Route = Router.Route;
 
 
 var routes = (
-  React.createElement(Route, {nam: "app", path: "/", handler: require('./components/app.jsx')}, 
+  React.createElement(Route, {name: "app", path: "/", handler: require('./components/app.jsx')}, 
     React.createElement(DefaultRoute, {handler: require('./components/homePage.jsx')}), 
     React.createElement(Route, {name: "authors", handler: require('./components/authors/authorPage.jsx')}), 
     React.createElement(Route, {name: "about", handler: require('./components/about/aboutPage.jsx')})
