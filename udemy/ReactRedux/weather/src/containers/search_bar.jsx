@@ -26,7 +26,7 @@ export default class SearchBar extends Component {
 				 className="form-control"
 				 value={this.state.term}
 				 onChange={ this.onInputChange } />
-				<span className="input-group-btn">
+					<span className="input-group-btn">
 					<button type="submit" className="btn btn-secondary">Submit</button>
 				</span>
 			</form>
