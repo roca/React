@@ -7,17 +7,11 @@ import ReduxPromise from 'redux-promise';
 
 import App from './components/app';
 import reducers from './reducers';
-import configureStore from './store/configureStore';
-
-const initial_state = {
-}
-
-const store = configureStore(initial_state);
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers),store}>
+  <Provider store={createStoreWithMiddleware(reducers)}>
     <App />
   </Provider>
   , document.querySelector('.container'));
