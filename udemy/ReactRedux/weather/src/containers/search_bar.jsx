@@ -29,7 +29,7 @@ class SearchBar extends Component {
 		return (
 			<form onSubmit={this.onFormSubmit} className="input-group">
 			<input
-				 placeholder="Get a five-day forecast in your favorite cities"
+				 placeholder="Get a five-day forecast in your favorite cities in the US."
 				 className="form-control"
 				 value={this.state.term}
 				 onChange={ this.onInputChange } />
@@ -49,8 +49,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(null,mapDispatchToProps)(SearchBar);
-
-
-
-
-
