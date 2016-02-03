@@ -1,4 +1,5 @@
-var expect = require('expect');
+import expect from 'expect';
+import { createStore } from 'redux';
 
 const  counter  = (state = 0, action)  => {
 
@@ -12,11 +13,14 @@ const  counter  = (state = 0, action)  => {
 	}
 }
 
-expect(counter(0,{type: 'INCREMENT'})).toEqual(1);
-expect(counter(1,{type: 'INCREMENT'})).toEqual(2);
-expect(counter(2,{type: 'DECREMENT'})).toEqual(1);
-expect(counter(1,{type: 'DECREMENT'})).toEqual(0);
-expect(counter(1,{type: 'SOME_THING_ELSE'})).toEqual(1);
-expect(counter(undefined,{})).toEqual(0);
+const store = createStore(counter);
+const render = () => {
+	document.body.innerText = store.getState();
+};
 
-console.log('Tests passed!');
+store.subscribe(render);
+document.addEventListener("DOMContentLoaded",render);
+
+document.addEventListener('click',() => {
+    store.dispatch({type: 'INCREMENT'});
+});
