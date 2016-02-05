@@ -12,6 +12,18 @@ const todos = (state,action) => {
 				completed: false
 			}
 		 ];
+	  case 'TOGGLE_TODO':
+		// return [
+    //   ...state.slice(0, action.id),
+    //   {...state[action.id],completed: !state[action.id].completed} ,
+    //   ...state.slice(action.id + 1)
+    // ]
+		return state.map(todo => {
+			if (todo.id !== action.id) {
+				return todo;
+			}
+			return {...todo,completed: !todo.completed}
+		});
 		default:
 		 return state;
 	}
@@ -42,4 +54,40 @@ export const testAddTodo = () => {
 
 }
 
+export const testToggleTodo = () => {
+	const stateBefore = [
+		{
+			id: 0,
+			text: 'Learn Redux',
+			completed: false
+		},
+		{
+			id: 1,
+			text: 'Go shoping',
+			completed: false
+		}
+	];
 
+	const action = { type: 'TOGGLE_TODO', id: 1};
+
+	const stateAfter = [
+		{
+			id: 0,
+			text: 'Learn Redux',
+			completed: false
+		},
+		{
+			id: 1,
+			text: 'Go shoping',
+			completed: true
+		}
+	];
+
+	deepFreeze(stateBefore);
+	deepFreeze(action);
+
+	expect(todos(stateBefore,action)).toEqual(stateAfter);
+	console.log('L12 testing toggle todo list reducer passed.')
+
+
+}
