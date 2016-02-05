@@ -34,7 +34,7 @@ const todos = (state,action) => {
     //   {...state[action.id],completed: !state[action.id].completed} ,
     //   ...state.slice(action.id + 1)
     // ]
-		return state.map(t => todo(t,action));
+		return state.map(t => todo(t, action));
 		default:
 		 return state;
 	}
