@@ -29,7 +29,6 @@ export const testAddTodo = () => {
 
 }
 
-export const testToggleTodo = () => {
 	const stateBefore = [
 		{
 			id: 0,
@@ -63,7 +62,7 @@ export const testToggleTodo = () => {
 
 	expect(todos(stateBefore,action)).toEqual(stateAfter);
 
-	console.log('L12 testing toggle todo list reducer passed.');
+	// console.log('L12 testing toggle todo list reducer passed.');
 
 	const visibilityFilter = (state= 'SHOW_ALL',action) => {
 		switch(action.type) {
@@ -104,7 +103,19 @@ export const testToggleTodo = () => {
 	// }
 
 
-	const store = createStore(todoApp);
+export const store = createStore(todoApp);
+
+
+
+
+
+
+
+
+
+
+
+export const testToggleTodo = () => {
 
 	console.log('Initial state');
 	console.log(store.getState());
