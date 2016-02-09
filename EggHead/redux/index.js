@@ -4,7 +4,11 @@ import ReactDOM from 'react-dom';
 import {testAddTodo as testL11, testToggleTodo as testL12 , store} from './todo_list_reducer'; //Test from L11
 
 
-const FilterLink = ({filter,children}) => {
+const FilterLink = ({filter,currentFilter,children}) => {
+
+	if (filter === currentFilter) {
+		return <span>{children}</span>;
+	}
 	return (
 		<a href='#' onClick={ e => {
 			e.preventDefault();
@@ -33,9 +37,14 @@ let nextId=0;
 class TodoApp extends Component {
 	render() {
 
+		const {
+			todos,
+			visibilityFilter
+		} = this.props;
+
 		const visibleTodos = getVisibiltyTodos(
-			this.props.todos,
-			this.props.visibilityFilter
+			todos,
+			visibilityFilter
 		);
 
 		return (
@@ -67,9 +76,9 @@ class TodoApp extends Component {
 				</ul>
 				<p>
 					SHOW:
-					{' '}<FilterLink filter='SHOW_ALL'>All</FilterLink>
-					{' '}<FilterLink filter='SHOW_ACTIVE'>Active</FilterLink>
-					{' '}<FilterLink filter='SHOW_COMPLETED'>Completed</FilterLink>
+					{' '}<FilterLink filter='SHOW_ALL' currentFilter={visibilityFilter}>All</FilterLink>
+					{' '}<FilterLink filter='SHOW_ACTIVE' currentFilter={visibilityFilter}>Active</FilterLink>
+					{' '}<FilterLink filter='SHOW_COMPLETED' currentFilter={visibilityFilter}>Completed</FilterLink>
 				</p>
 			</div>
 		);
