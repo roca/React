@@ -17,7 +17,7 @@ const FilterLink = ({filter,children}) => {
 	);
 };
 
-const getVisibiltyTodos = (todos,filter)=> {
+const getVisibiltyTodos = (todos,filter) => {
 	switch (filter) {
 		case 'SHOW_ALL':
 			return todos;
@@ -35,7 +35,7 @@ class TodoApp extends Component {
 
 		const visibleTodos = getVisibiltyTodos(
 			this.props.todos,
-			this.props.visibiltyFilter
+			this.props.visibilityFilter
 		);
 
 		return (
@@ -65,7 +65,7 @@ class TodoApp extends Component {
 						</li>
 					)}
 				</ul>
-				<p> 
+				<p>
 					SHOW:
 					{' '}<FilterLink filter='SHOW_ALL'>All</FilterLink>
 					{' '}<FilterLink filter='SHOW_ACTIVE'>Active</FilterLink>
@@ -76,12 +76,11 @@ class TodoApp extends Component {
 	}
 }
 
-
 const render = () => {
 	 let node = document.getElementById('root');
 	 if (node) {
 		ReactDOM.render(
-			<TodoApp {...store.getState()}/>,
+			<TodoApp {...store.getState()} />,
 			document.getElementById('root')
 		);
 	 }
