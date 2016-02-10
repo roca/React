@@ -2,24 +2,9 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import {testAddTodo as testL11, testToggleTodo as testL12 , store} from './todo_list_reducer'; //Test from L11
+import TodoList from './components/todo_list';
+import FilterLink from './components/filter_link';
 
-
-const FilterLink = ({filter,currentFilter,children}) => {
-
-	if (filter === currentFilter) {
-		return <span>{children}</span>;
-	}
-	return (
-		<a href='#' onClick={ e => {
-			e.preventDefault();
-			store.dispatch({
-				type:'SET_VISIBILITY_FILTER',
-				filter
-			});
-
-		}}>{ children }</a>
-	);
-};
 
 const getVisibiltyTodos = (todos,filter) => {
 	switch (filter) {
@@ -60,25 +45,15 @@ class TodoApp extends Component {
 					});
 					this.input.value = '';
 				}}>Add todo</button>
-				<ul>
-					{ visibleTodos.map(todo =>
-						<li key={todo.id} onClick={() =>{
-							store.dispatch({
-								type: 'TOGGLE_TODO',
-								id: todo.id
-							});
-						}} style = {{
-							textDecoration: todo.completed ? 'line-through' : 'none'
-						}}>
-							{todo.text}
-						</li>
-					)}
-				</ul>
+				<TodoList
+					todos={visibleTodos}
+					onTodoClick={id => store.dispatch({type:'TOGGLE_TODO',id})}
+				/>
 				<p>
 					SHOW:
-					{' '}<FilterLink filter='SHOW_ALL' currentFilter={visibilityFilter}>All</FilterLink>
-					{' '}<FilterLink filter='SHOW_ACTIVE' currentFilter={visibilityFilter}>Active</FilterLink>
-					{' '}<FilterLink filter='SHOW_COMPLETED' currentFilter={visibilityFilter}>Completed</FilterLink>
+					{' '}<FilterLink store={store} filter='SHOW_ALL' currentFilter={visibilityFilter}>All</FilterLink>
+					{', '}<FilterLink store={store} filter='SHOW_ACTIVE' currentFilter={visibilityFilter}>Active</FilterLink>
+					{', '}<FilterLink store={store} filter='SHOW_COMPLETED' currentFilter={visibilityFilter}>Completed</FilterLink>
 				</p>
 			</div>
 		);
