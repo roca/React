@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 
 import {testAddTodo as testL11, testToggleTodo as testL12 , store} from './todo_list_reducer'; //Test from L11
 import TodoList from './components/todo_list';
-import FilterLink from './components/filter_link';
+import AddTodo from './components/add_todo';
+import Footer from './components/footer';
 
 
 const getVisibiltyTodos = (todos,filter) => {
@@ -34,27 +35,25 @@ class TodoApp extends Component {
 
 		return (
 			<div>
-				<input ref={node => {
-					this.input = node;
-				}} />
-				<button onClick={ () => {
+				<AddTodo onAddClick={ text =>
 					store.dispatch({
 						type: 'ADD_TODO',
-						text: this.input.value,
+						text: text,
 						id: nextId++
-					});
-					this.input.value = '';
-				}}>Add todo</button>
+					})
+					
+				} />
 				<TodoList
 					todos={visibleTodos}
 					onTodoClick={id => store.dispatch({type:'TOGGLE_TODO',id})}
 				/>
-				<p>
-					SHOW:
-					{' '}<FilterLink store={store} filter='SHOW_ALL' currentFilter={visibilityFilter}>All</FilterLink>
-					{', '}<FilterLink store={store} filter='SHOW_ACTIVE' currentFilter={visibilityFilter}>Active</FilterLink>
-					{', '}<FilterLink store={store} filter='SHOW_COMPLETED' currentFilter={visibilityFilter}>Completed</FilterLink>
-				</p>
+
+				<Footer 
+					visibilityFilter={ visibilityFilter } 
+					onFilterClick = { filter =>
+						store.dispatch({type: 'SET_VISIBILITY_FILTER', filter})
+					}
+				/>
 			</div>
 		);
 	}
