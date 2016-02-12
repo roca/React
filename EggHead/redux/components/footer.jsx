@@ -1,16 +1,16 @@
 import React from 'react';
 
-import FilterLink from './filter_link';
+import FilterLink from '../containers/filter_link';
 
 
-const Footer = ({visibilityFilter,onFilterClick}) => {
+const Footer = () => {
 	return (
 
 		<p>
 			SHOW:
-			{' '}<FilterLink onClick={onFilterClick} filter='SHOW_ALL' currentFilter={visibilityFilter}>All</FilterLink>
-			{', '}<FilterLink onClick={onFilterClick} filter='SHOW_ACTIVE' currentFilter={visibilityFilter}>Active</FilterLink>
-			{', '}<FilterLink onClick={onFilterClick} filter='SHOW_COMPLETED' currentFilter={visibilityFilter}>Completed</FilterLink>
+			{' '} <FilterLink filter='SHOW_ALL'>All</FilterLink>
+			{', '}<FilterLink filter='SHOW_ACTIVE'>Active</FilterLink>
+			{', '}<FilterLink filter='SHOW_COMPLETED'>Completed</FilterLink>
 		</p>
 
 	);

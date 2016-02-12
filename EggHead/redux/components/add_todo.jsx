@@ -1,7 +1,10 @@
 import React from 'react';
 
+import {store} from '../todo_list_reducer'; //Test from L11
 
-const AddTodo = ({onAddClick}) => {
+let nextId=0;
+
+const AddTodo = () => {
 
  let input;
 
@@ -9,7 +12,7 @@ const AddTodo = ({onAddClick}) => {
 	<div>
        <input ref={node => {input = node;}} />
 		<button onClick={ () => {
-			onAddClick(input.value);
+			store.dispatch({ type: 'ADD_TODO', text: input.value, id: nextId++ });
 			input.value = '';
 		}}>
 		Add todo</button>
