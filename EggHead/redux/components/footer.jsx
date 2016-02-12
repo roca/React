@@ -16,5 +16,5 @@ const Footer = ({visibilityFilter,onFilterClick}) => {
 	);
 };
 
-//LbYsy6sMb2CUW@
+
 export default Footer;
