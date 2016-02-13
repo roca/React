@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import {testAddTodo as testL11, testToggleTodo as testL12 , store} from './todo_list_reducer'; //Test from L11
 import AddTodo from './components/add_todo';
 import Footer from './components/footer';
 import VisibleTodoList from './containers/visible_todo_list';
 
+import {store} from './store'; //Test from L11
 
 
-const TodoApp = () => (
+const TodoApp = ({store}) => (
 			<div>
-				<AddTodo />
-				<VisibleTodoList />
-				<Footer />
+				<AddTodo store={store}/>
+				<VisibleTodoList store={store}/>
+				<Footer store={store}/>
 			</div>
 );
 
@@ -20,7 +20,7 @@ const TodoApp = () => (
 const render = () => {
 	 let node = document.getElementById('root');
 	 if (node) {
-		ReactDOM.render( <TodoApp />, document.getElementById('root') );
+		ReactDOM.render( <TodoApp store={store}/>, document.getElementById('root') );
 	 }
 };
 

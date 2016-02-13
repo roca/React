@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import TodoList from '../components/todo_list';
-import {store} from '../todo_list_reducer'; //Test from L11
 
 const getVisibiltyTodos = (todos,filter) => {
 	switch (filter) {
@@ -14,9 +14,26 @@ const getVisibiltyTodos = (todos,filter) => {
 	}
 };
 
+// const mapStateToProps = (state) => {
+// 	return {
+// 		todos: getVisibiltyTodos(state.todos,state.visibilityFilter)
+// 	};
+// };
+
+// const mapDispatchToProps = (dispatch) => {
+// 	return {
+// 		onTodoClick: (id)=> {dispatch({type:'TOGGLE_TODO',id})}
+// 	};
+// }
+
+// const VisibleTodoList = connect(mapStateToProps,mapDispatchToProps)(TodoList);
+
+
+
 class VisibleTodoList extends Component {
 
 	componentDidMount() {
+	const { store } = this.props;
     this.unsubscribe = store.subscribe(() => this.forceUpdate());
   }
 
@@ -26,6 +43,7 @@ class VisibleTodoList extends Component {
 
 	render() {
 		const props = this.props;
+		const { store } = props;
 		const state = store.getState();
 
 		return (

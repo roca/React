@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-import {store} from '../todo_list_reducer'; //Test from L11
 import Link from '../components/link';
 
 class FilterLink extends Component {
 
   componentDidMount() {
+    const {store} = this.props;
     this.unsubscribe = store.subscribe(() => this.forceUpdate());
   }
 
@@ -15,6 +15,7 @@ class FilterLink extends Component {
 
   render() {
     const props = this.props;
+    const { store } = props;
     const state = store.getState();
 
     return (
