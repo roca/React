@@ -1,10 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-import {store} from '../todo_list_reducer'; //Test from L11
+import { addTodo } from '../actions/index';
 
-let nextId=0;
-
-const AddTodo = () => {
+let AddTodo = ({ dispatch }) => {
 
  let input;
 
@@ -12,7 +11,7 @@ const AddTodo = () => {
 	<div>
        <input ref={node => {input = node;}} />
 		<button onClick={ () => {
-			store.dispatch({ type: 'ADD_TODO', text: input.value, id: nextId++ });
+			dispatch(addTodo(input.value));
 			input.value = '';
 		}}>
 		Add todo</button>
@@ -20,5 +19,6 @@ const AddTodo = () => {
   );
 };
 
+AddTodo = connect(null,null)(AddTodo);
 
 export default AddTodo;

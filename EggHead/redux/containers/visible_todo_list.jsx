@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import TodoList from '../components/todo_list';
-import {store} from '../todo_list_reducer'; //Test from L11
+import { toggleTodo } from '../actions/index';
+
+
 
 const getVisibiltyTodos = (todos,filter) => {
 	switch (filter) {
@@ -14,27 +17,51 @@ const getVisibiltyTodos = (todos,filter) => {
 	}
 };
 
-class VisibleTodoList extends Component {
+const mapStateToProps = (state) => {
+	return {
+		todos: getVisibiltyTodos(state.todos,state.visibilityFilter)
+	};
+};
 
-	componentDidMount() {
-    this.unsubscribe = store.subscribe(() => this.forceUpdate());
-  }
-
-  componentWillUnMount() {
-    this.unsubscribe();
-  }
-
-	render() {
-		const props = this.props;
-		const state = store.getState();
-
-		return (
-			<TodoList
-				todos={getVisibiltyTodos(state.todos,state.visibilityFilter)}
-				onTodoClick={id => store.dispatch({type:'TOGGLE_TODO',id})} />
-		);
-	}
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onTodoClick: (id) => {
+			dispatch(toggleTodo(id));
+		}
+	};
 }
+
+const VisibleTodoList = connect(mapStateToProps,mapDispatchToProps)(TodoList);
+
+
+
+// class VisibleTodoList extends Component {
+
+// 	componentDidMount() {
+// 	const { store } = this.context;
+//     this.unsubscribe = store.subscribe(() => this.forceUpdate());
+//   }
+
+//   componentWillUnMount() {
+//     this.unsubscribe();
+//   }
+
+// 	render() {
+// 		const props = this.props;
+// 		const { store } = this.context;
+// 		const state = store.getState();
+
+// 		return (
+// 			<TodoList
+// 				todos={getVisibiltyTodos(state.todos,state.visibilityFilter)}
+// 				onTodoClick={id => store.dispatch({type:'TOGGLE_TODO',id})} />
+// 		);
+// 	}
+// }
+
+// VisibleTodoList.contextTypes = {
+// 	store: React.PropTypes.object
+// }
 
 
 export default VisibleTodoList;

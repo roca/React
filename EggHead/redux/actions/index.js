@@ -1,38 +1,22 @@
-export const todo = (state, action) => {
-	switch (action.type) {
-		case 'ADD_TODO':
-		return {
-							id: action.id,
-							text: action.text,
-							completed: false
-						};
-		case 'TOGGLE_TODO':
-				if (state.id !== action.id) {
-					return state;
-				}
-				return {...state,completed: !state.completed}
-			default:
-			return state;
-	}
+let nextId=0;
+export const addTodo = (text) => {
+	return { 
+		type: 'ADD_TODO', 
+		text: text, 
+		id: nextId++ 
+    };
+};
 
-}
+export const setVisibilityFilter = (filter) => {
+	return {
+		type: 'SET_VISIBILITY_FILTER',
+		filter
+	};
+};
 
-export const todos = (state=[],action) => {
-	switch (action.type) {
-		case 'ADD_TODO':
-		 return [
-		 ...state,
-			todo(undefined,action)
-		 ];
-	  case 'TOGGLE_TODO':
-		// return [
-    //   ...state.slice(0, action.id),
-    //   {...state[action.id],completed: !state[action.id].completed} ,
-    //   ...state.slice(action.id + 1)
-    // ]
-		return state.map(t => todo(t, action));
-		default:
-		 return state;
-	}
-	return state
-}
+export const toggleTodo = (id) => {
+	return {
+		type:'TOGGLE_TODO',
+		id
+	};
+};

@@ -1,32 +1,58 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import {store} from '../todo_list_reducer'; //Test from L11
+import { setVisibilityFilter } from '../actions/index';
+
+
 import Link from '../components/link';
 
-class FilterLink extends Component {
+const mapStateToProps = (state,ownProps) => {
+  return {
+    active: ownProps.filter === state.visibilityFilter
+  };
+};
 
-  componentDidMount() {
-    this.unsubscribe = store.subscribe(() => this.forceUpdate());
-  }
-
-  componentWillUnMount() {
-    this.unsubscribe();
-  }
-
-  render() {
-    const props = this.props;
-    const state = store.getState();
-
-    return (
-      <Link
-        onClick={ () => store.dispatch({type: 'SET_VISIBILITY_FILTER',filter: props.filter}) }
-        active={ props.filter === state.visibilityFilter }
-      >
-        {props.children}
-      </Link>
-    );
-  }
+const mapDispatchToProps = (dispatch,ownProps) => {
+  return {
+    onClick: () => dispatch(setVisibilityFilter(ownProps.filter)) 
+  };
 }
+
+const FilterLink = connect(mapStateToProps,mapDispatchToProps)(Link);
 
 
 export default FilterLink;
+
+
+// class FilterLink extends Component {
+
+//   componentDidMount() {
+//     const {store} = this.context;
+//     this.unsubscribe = store.subscribe(() => this.forceUpdate());
+//   }
+
+//   componentWillUnMount() {
+//     this.unsubscribe();
+//   }
+
+//   render() {
+//     const props = this.props;
+//     const { store } = this.context;
+//     const state = store.getState();
+
+//     return (
+//       <Link
+//         onClick={ () => store.dispatch({type: 'SET_VISIBILITY_FILTER',filter: props.filter}) }
+//         active={ props.filter === state.visibilityFilter }
+//       >
+//         {props.children}
+//       </Link>
+//     );
+//   }
+// }
+
+// FilterLink.contextTypes = {
+//   store: React.PropTypes.object
+// }
+
+
