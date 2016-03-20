@@ -14,7 +14,7 @@ class PluralTodo extends Component {
 
   render() {
       return (
-        <Text>Hello there!</Text>
+        <Text>Hello there, again!</Text>
       );
   }
 
