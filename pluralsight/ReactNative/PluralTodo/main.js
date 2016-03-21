@@ -9,12 +9,17 @@ class PluralTodo extends Component {
   constructor(props, context) {
       super(props, context);
       this.state = {
+          todos: [
+              {
+                  task: 'Learn React Native',
+              },
+          ],
       };
   }
 
   render() {
       return (
-        <Text>Hello there, again!</Text>
+      <Text>Hello there, again!</Text>
       );
   }
 

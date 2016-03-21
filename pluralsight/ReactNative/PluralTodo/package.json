@@ -1,5 +1,5 @@
 {
-  "name": "PluralTodo",
+  "name": "app",
   "version": "0.0.0",
   "description": "Hello Exponent!",
   "author": null,
@@ -8,15 +8,11 @@
   "exp": {
     "sdkVersion": "4.0.0"
   },
-  "scripts": {
-    "start": "react-native start"
-  },
   "dependencies": {
     "react-native": "github:exponentjs/react-native#2016-01-02",
     "babel-eslint": "4.1.6",
     "eslint": "1.10.3",
     "eslint-config-airbnb": "2.1.1",
-    "eslint-plugin-react": "3.12.0",
-    "react-native-swipeout": "2.0.12"
+    "eslint-plugin-react": "3.12.0"
   }
 }
