@@ -1,8 +1,9 @@
-const React = require('react-native');
+import React from 'react-native';
+import TaskList from './TaskList';
+
 const {
   AppRegistry,
   Component,
-  Text,
 } = React;
 
 class PluralTodo extends Component {
@@ -19,7 +20,7 @@ class PluralTodo extends Component {
 
   render() {
       return (
-      <Text>Hello there, again!</Text>
+        <TaskList />
       );
   }
 
