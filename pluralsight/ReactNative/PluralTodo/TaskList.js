@@ -13,8 +13,8 @@ const styles = React.StyleSheet.create({
 class TaskList extends React.Component {
     render() {
         return (
-          <View styles={styles.container}>
-            <Text>Hi, this is a TaskList!</Text>
+          <View style={styles.container}>
+            <Text>Hi, this is a TaskList!ccccc</Text>
           </View>
       );
     }
