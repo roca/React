@@ -1,7 +1,8 @@
 import React from 'react-native';
 const {
-  View,
   Text,
+  View,
+  ListView,
 } = React;
 
 const styles = React.StyleSheet.create({
@@ -11,14 +12,39 @@ const styles = React.StyleSheet.create({
 });
 
 class TaskList extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+
+        const ds = new ListView.DataSource({
+            rowHasChanged: (r1, r2) => r1 !== r2,
+        });
+
+        this.state = {
+            dataSource: ds.cloneWithRows(props.todos),
+        };
+    }
+
+    renderRow(todo) {
+        return (
+            <Text>{todo.task}</Text>
+        );
+    }
     render() {
         return (
           <View style={styles.container}>
-            <Text>Hi, this is a TaskList!ccccc</Text>
+            <ListView
+                dataSource={this.state.dataSource}
+                key={this.props.todos}
+                renderRow={this.renderRow.bind(this)}
+            />
           </View>
       );
     }
 }
 
+TaskList.propTypes = {
+    todos: React.PropTypes
+      .arrayOf(React.PropTypes.object).isRequired,
+};
 
 export default TaskList;

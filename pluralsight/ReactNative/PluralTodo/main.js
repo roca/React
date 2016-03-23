@@ -14,13 +14,16 @@ class PluralTodo extends Component {
               {
                   task: 'Learn React Native',
               },
+              {
+                  task: 'Learn Redux',
+              },
           ],
       };
   }
 
   render() {
       return (
-        <TaskList />
+        <TaskList todos={this.state.todos}/>
       );
   }
 
