@@ -4,6 +4,8 @@ import TaskRow from './TaskRow';
 const {
   View,
   ListView,
+  TouchableHighlight,
+  Text,
 } = React;
 
 const styles = React.StyleSheet.create({
@@ -12,6 +14,20 @@ const styles = React.StyleSheet.create({
         backgroundColor: '#F7F7F7',
         flex: 1,
         justifyContent: 'flex-start',
+    },
+    button: {
+        height: 60,
+        borderColor: '#05A501',
+        borderWidth: 2,
+        backgroundColor: '#333',
+        margin: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    buttonText: {
+        color: '#FAFAFA',
+        fontSize: 20,
+        fontWeight: '600',
     },
 });
 
@@ -41,12 +57,24 @@ class TaskList extends React.Component {
                 key={this.props.todos}
                 renderRow={this.renderRow.bind(this)}
             />
+
+          <TouchableHighlight
+              onPress={this.props.onAddStarted}
+              style={styles.button}
+          >
+              <Text
+                  style={styles.buttonText}
+              >
+                Add one
+              </Text>
+          </TouchableHighlight>
           </View>
       );
     }
 }
 
 TaskList.propTypes = {
+    onAddStarted: React.PropTypes.func.isRequired,
     todos: React.PropTypes
       .arrayOf(React.PropTypes.object).isRequired,
 };
