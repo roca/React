@@ -1,11 +1,11 @@
 import React from 'react-native';
 import TaskList from './TaskList';
+import TaskForm from './TaskForm';
 
 const {
   AppRegistry,
   Component,
   Navigator,
-  Text,
 } = React;
 
 class PluralTodo extends Component {
@@ -33,11 +33,7 @@ class PluralTodo extends Component {
       switch (route.name) {
       case 'taskform':
           return (
-            <Text
-                style={{
-                    paddingTop: 20,
-                }}
-            >Add form comes here!</Text>
+            <TaskForm />
           );
       default:
           return (
@@ -57,7 +53,7 @@ class PluralTodo extends Component {
       return (
           <Navigator
               configureScene={this.configureScene}
-              initialRoute={{ name: 'tasklist', index: 0 }}
+              initialRoute={{ name: 'taskform', index: 0 }}
               ref={((nav) => {
                   this.nav = nav;
               })}
