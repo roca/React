@@ -24,7 +24,9 @@ const styles = React.StyleSheet.create({
         borderRadius: 3,
     },
     buttonText: {
-
+        fontSize: 18,
+        fontWeight: '600',
+        color: '#FAFAFA',
     },
     button: {
         height: 45,
@@ -37,7 +39,7 @@ const styles = React.StyleSheet.create({
         justifyContent: 'center',
     },
     cancelButton: {
-
+        backgroundColor: '#666',
     },
 });
 
