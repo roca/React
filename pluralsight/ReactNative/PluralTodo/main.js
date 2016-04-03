@@ -29,16 +29,41 @@ class PluralTodo extends Component {
       });
   }
 
+  onCancel() {
+      console.log('cancelled');
+      this.nav.pop();
+  }
+
+  onAdd(task) {
+      console.log('a task was added: ', task);
+      this.state.todos.push({ task });
+      this.setState({ todos: this.state.todos });
+      this.nav.pop();
+  }
+
+  onDone(todo) {
+      console.log('todo was cpmpleted: ', todo.task);
+      const filteredTodos =
+        this.state.todos.filter((filterTodo) => {
+            return filterTodo !== todo;
+        });
+        this.setState({ todos: filteredTodos });
+  }
+
   renderScene(route, nav) {
       switch (route.name) {
       case 'taskform':
           return (
-            <TaskForm />
+            <TaskForm
+                onAdd={this.onAdd.bind(this)}
+                onCancel={this.onCancel.bind(this)}
+            />
           );
       default:
           return (
             <TaskList
                 onAddStarted={this.onAddStarted.bind(this)}
+                onDone={this.onDone.bind(this)}
                 todos={this.state.todos}
             />
           );
@@ -53,7 +78,7 @@ class PluralTodo extends Component {
       return (
           <Navigator
               configureScene={this.configureScene}
-              initialRoute={{ name: 'taskform', index: 0 }}
+              initialRoute={{ name: 'tasklist', index: 0 }}
               ref={((nav) => {
                   this.nav = nav;
               })}
