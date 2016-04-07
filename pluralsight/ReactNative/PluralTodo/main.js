@@ -47,7 +47,7 @@ class PluralTodo extends Component {
         this.state.todos.filter((filterTodo) => {
             return filterTodo !== todo;
         });
-        this.setState({ todos: filteredTodos });
+      this.setState({ todos: filteredTodos });
   }
 
   renderScene(route, nav) {

@@ -42,7 +42,7 @@ class FirstExperience extends React.Component {
 
     return (
       <ExScreen
-        title="My FirstExperience Screencast"
+        title="Screencast"
         headerColor={this.state.headerColor}
         scrollEnabled={!this.state.isBoxPressed}
         style={styles.container}>
