@@ -1,0 +1,34 @@
+{
+  "name": "railscasts-prime-syntax",
+  "theme": "syntax",
+  "version": "1.0.1",
+  "description": "Syntax theme based on the RailsCast TextMate theme, tweaked to look better in Atom.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/czj/atom-railscasts-prime-syntax"
+  },
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "readme": "# RailsCasts Prime theme\n\nSyntax theme for Atom editor, based on the RailsCast TextMate theme.\n\nTweaks have been made to make comments more discreet in the source code,\nand have some colors be slightly different in some cases. For example :\n\n- make brackets #{} in Haml/Slim more visible\n- separate color for classes names and constants\n- different blue for ruby symbols and keywords (like true)\n\n## HTML + ERB\n\n![HTML+ERB](http://i.imgur.com/FEUcNtc.png)\n\n## Slim\n\n![Slim](http://i.imgur.com/Sy3qODY.png)\n\n## Ruby (Rails)\n\n![Ruby Rails](http://i.imgur.com/mMW0miT.png)\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/czj/atom-railscasts-prime-syntax/issues"
+  },
+  "homepage": "https://github.com/czj/atom-railscasts-prime-syntax",
+  "_id": "railscasts-prime-syntax@1.0.1",
+  "_shasum": "57336ff2232d3bca9f683d6643835e124e269a24",
+  "_resolved": "file:../d-115627-3998-1a8ub7k/package.tgz",
+  "_from": "../d-115627-3998-1a8ub7k/package.tgz",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [],
+    "extensions": {
+      ".json": [
+        "package.json"
+      ]
+    },
+    "folders": []
+  }
+}
