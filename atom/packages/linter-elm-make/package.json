@@ -1,0 +1,128 @@
+{
+  "name": "linter-elm-make",
+  "main": "./lib/linter-elm-make.js",
+  "version": "0.4.0",
+  "description": "Lint Elm code with elm-make",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mybuddymichael/linter-elm-make.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 < 2.0.0"
+  },
+  "dependencies": {
+    "fs": "0.0.2",
+    "path": "^0.12.7"
+  },
+  "providedServices": {
+    "linter": {
+      "versions": {
+        "1.0.0": "provideLinter"
+      }
+    }
+  },
+  "consumedServices": {
+    "status-bar": {
+      "versions": {
+        "^1.0.0": "consumeStatusBar"
+      }
+    }
+  },
+  "readme": "# linter-elm-make\n\nLint your Elm files in Atom with [linter](https://github.com/atom-community/linter) and `elm-make`.\n\n## Installation\n\n1. [Install `elm`](http://elm-lang.org/install).\n1. `$ apm install linter`\n1. `$ apm install language-elm`\n1. `$ apm install linter-elm-make`\n1. `$ which elm-make` and set that as your executable path in this installed package's configuration.\n\n## Prior Art\n\nThe boilerplate code here is repurposed from [linter-hlint](https://github.com/AtomLinter/linter-hlint). Much thanks to its [contributors](https://github.com/AtomLinter/linter-hlint/graphs/contributors).\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/mybuddymichael/linter-elm-make/issues"
+  },
+  "homepage": "https://github.com/mybuddymichael/linter-elm-make#readme",
+  "_id": "linter-elm-make@0.4.0",
+  "_shasum": "2474723b113ed1321c5c7225592fb945fdf2bd0f",
+  "_resolved": "file:../d-11608-5308-1dafall/package.tgz",
+  "_from": "../d-11608-5308-1dafall/package.tgz",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [
+      {
+        "name": "fs",
+        "version": "0.0.2",
+        "path": "node_modules/fs/index.js"
+      },
+      {
+        "name": "path",
+        "version": "0.12.7",
+        "path": "node_modules/path/path.js"
+      },
+      {
+        "name": "process",
+        "version": "0.11.2",
+        "path": "node_modules/path/node_modules/process/index.js"
+      },
+      {
+        "name": "util",
+        "version": "0.10.3",
+        "path": "node_modules/path/node_modules/util/util.js"
+      },
+      {
+        "name": "inherits",
+        "version": "2.0.1",
+        "path": "node_modules/path/node_modules/util/node_modules/inherits/inherits.js"
+      }
+    ],
+    "extensions": {
+      ".js": [
+        "lib/linter-elm-make.js",
+        "node_modules/fs/index.js",
+        "node_modules/path/node_modules/process/browser.js",
+        "node_modules/path/node_modules/process/index.js",
+        "node_modules/path/node_modules/process/test.js",
+        "node_modules/path/node_modules/util/node_modules/inherits/inherits.js",
+        "node_modules/path/node_modules/util/node_modules/inherits/inherits_browser.js",
+        "node_modules/path/node_modules/util/node_modules/inherits/test.js",
+        "node_modules/path/node_modules/util/support/isBuffer.js",
+        "node_modules/path/node_modules/util/support/isBufferBrowser.js",
+        "node_modules/path/node_modules/util/util.js",
+        "node_modules/path/path.js"
+      ],
+      ".json": [
+        "node_modules/fs/package.json",
+        "node_modules/path/node_modules/process/package.json",
+        "node_modules/path/node_modules/util/node_modules/inherits/package.json",
+        "node_modules/path/node_modules/util/package.json",
+        "node_modules/path/package.json",
+        "package.json"
+      ]
+    },
+    "folders": [
+      {
+        "paths": [
+          "lib",
+          ""
+        ],
+        "dependencies": {
+          "fs": "0.0.2",
+          "path": "^0.12.7"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/path"
+        ],
+        "dependencies": {
+          "process": "^0.11.1",
+          "util": "^0.10.3"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/path/node_modules/util",
+          "node_modules/path/node_modules/util/support",
+          "node_modules/path/node_modules/util/test/browser",
+          "node_modules/path/node_modules/util/test/node"
+        ],
+        "dependencies": {
+          "inherits": "2.0.1"
+        }
+      }
+    ]
+  }
+}

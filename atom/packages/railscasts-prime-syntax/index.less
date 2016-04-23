@@ -1,0 +1,200 @@
+@import "./styles/base.less";
+
+@brownish: #cc7833;
+@redish: #da4939;
+@lightgreen: #a5c261;
+@darkgreen: #429965;
+@lightblue: #6e9cbe;
+@yellowish: #e8bf6a;
+@greenish: #519f50;
+@purpleish: saturate(darken(rgb(204,206,255), 1), 3);
+
+.comment {
+  font-style: italic;
+}
+
+.entity {
+  // Ruby Slim : classes of div like .column
+  &.name.tag,
+  &.other.attribute-name {
+    color: @yellowish;
+  }
+
+  &.name.tag,
+  // Class name in "class TheClass" definition
+  &.name.type {
+    text-decoration: none;
+  }
+  &.other.inherited-class {
+    color: darken(@yellowish, 15)
+  }
+}
+
+.keyword {
+  color: @brownish;
+
+  &.control {
+    color: @brownish;
+  }
+
+  &.operator {
+    color: #999;
+  }
+
+  // Language keywords : initialize raise private attr_reader etc...
+  &.other.special-method {
+    color: @brownish;
+  }
+
+  // &.other.unit {
+  //   color: @orange;
+  // }
+}
+
+.string {
+  // Text inside strings
+  color: @lightgreen;
+
+  // All text inside the regexps
+  &.regexp {
+    color: @darkgreen;
+  }
+
+  &.other.link {
+    color: @red;
+  }
+
+  // Ruby code inside a string
+  .source {
+    color: @darkgreen;
+  }
+}
+
+// In ruby that is "true" or "false" or "nil"
+// Also ":" for hashes keys, symbols
+.constant {
+  color: darken(@lightblue, 10);
+
+  &.numeric {
+    color: @lightgreen;
+  }
+
+  // Ruby symbols (only the text inside)
+  &.other.symbol {
+    color: @lightblue;
+  }
+
+  // CAPS constants
+  // Also, classes names passed as arguments. Ex: include ThisClass
+  &.other.variable {
+    color: lighten(@redish, 20);
+  }
+
+  &.character.escape {
+    color: purple;
+  }
+
+  &.other.color {
+    color: @lightblue;
+  }
+}
+
+
+// Comments ! Of course ! :-)
+.comment {
+  color: darken(@syntax-text-color, 32);
+  font-style: italic;
+
+  // The signs before comments : # or // or /*
+  &.punctuation.definition {
+    color: darken(@syntax-text-color, 42);
+  }
+}
+
+
+.punctuation {
+  // Ruby < symbol class inheritance
+  &.inheritance {
+    &.variable {
+      color: @brownish;
+    }
+  }
+
+  &.definition {
+    // Quotes surrounding a string
+    &.string {
+      color: darken(@lightgreen, 15);
+    }
+
+    // Parenthesis surrounding a function's params
+    &.parameters {
+      color: darken(@syntax-text-color, 20);
+    }
+
+    // Ruby << symbol for inheritance like in "class << self"
+    &.variable {
+      color: @brownish;
+    }
+  }
+
+  // Ruby embed code in a Slim template
+  // Example : #id This embed #{ ruby_code(42) } informations !
+  &.section.embedded {
+    color: @redish;
+  }
+}
+
+// The | character in a lambda's params for instance
+.variable {
+  color: @redish;
+
+  // The instance variable name
+  &.instance,
+  // The @ sign before the instance variable name
+  .punctuation.variable {
+    color: @purpleish;
+  }
+
+  // The | character in lambda's params
+  &.punctuation.separator {
+    color: darken(@syntax-text-color, 20);
+  }
+
+  // Block params, between the two pipes, like |variable|
+  &.other.block {
+    color: @syntax-text-color;
+  }
+
+  &.interpolation {
+    color: @purpleish;
+  }
+
+  &.parameter.function {
+    color: @syntax-text-color;
+  }
+
+  &.language.self {
+    color: darken(@syntax-text-color, 20);
+  }
+}
+
+.support {
+  // Ruby constants in caps
+  // Class names
+  &.class {
+    color: lighten(@redish, 15);
+  }
+
+  // Method calls like "render", "content_for", etc. in rails' views
+  // or select gsub etc... in ruby code
+  //
+  // Somewhere in the CSS there is an !important on .support.function
+  // I can't find it but it overwrite this rule
+  &.function {
+    color: @syntax-text-color !important;
+  }
+}
+
+.support.function.kernel.ruby {
+  color: @purpleish;
+}
