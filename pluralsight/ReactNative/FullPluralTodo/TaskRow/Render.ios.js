@@ -1,25 +1,45 @@
 import React from 'react-native';
+import Swipeout from 'react-native-swipeout';
 
 const {
-  TouchableHighlight,
   Text,
   View,
 } = React;
 
+const locatStyles = React.StyleSheet.create({
+    row: {
+        marginBottom: 0,
+        marginLeft: 0,
+        marginRight: 0,
+    },
+    container: {
+        marginBottom: 20,
+    },
+});
 
-export default function render(styles) {
+export default function render(baseStyles) {
+    const buttons = [
+        {
+            text: 'Done',
+            backgroundColor: '#05A5D1',
+            underlayColor: '#273539',
+            onPress: this.onDonePressed.bind(this),
+        },
+    ];
     return (
-      <View style={styles.container}>
-        <Text style={styles.label}>
-          ios: {this.props.todo.task}
-        </Text>
-
-      <TouchableHighlight
-          onPress={this.onDonePressed.bind(this)}
-          style={styles.doneButton}
+      <View
+          style={locatStyles.container}
       >
-          <Text>Done</Text>
-      </TouchableHighlight>
+        <Swipeout
+            backgroundColor="#fff"
+            right={buttons}
+        >
+          <View style={[baseStyles.container, locatStyles.row]}>
+            <Text style={baseStyles.label}>
+              ios: {this.props.todo.task}
+            </Text>
+          </View>
+        </Swipeout>
       </View>
     );
 }
