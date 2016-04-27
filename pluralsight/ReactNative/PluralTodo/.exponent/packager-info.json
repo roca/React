@@ -1,0 +1,6 @@
+{
+  "packagerPort": 19001,
+  "port": 19000,
+  "ngrok": "http://nd-kp9.00-5n8-7k6u.pluraltodo.exp.direct",
+  "packagerNgrok": "https://packager.nd-kp9.00-5n8-7k6u.pluraltodo.exp.direct"
+}
