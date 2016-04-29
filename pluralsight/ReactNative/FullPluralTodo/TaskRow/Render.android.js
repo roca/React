@@ -1,24 +1,36 @@
 import React from 'react-native';
 
 const {
-  TouchableHighlight,
-  Text,
   View,
+  Text,
+  TouchableHighlight,
+  Image,
 } = React;
+
+const localStyle = React.StyleSheet.create({
+    doneButton: {
+        borderRadius: 5,
+        padding: 5,
+    },
+});
 
 
 export default function render(styles) {
     return (
       <View style={styles.container}>
-        <Text style={styles.label}>
-          and: {this.props.todo.task}
+        <Text
+            style={styles.label}
+        >and: {this.props.todo.task}
         </Text>
 
       <TouchableHighlight
           onPress={this.onDonePressed.bind(this)}
-          style={styles.doneButton}
+          style={localStyle.doneButton}
+          underlayColor="#ddd"
       >
-          <Text>Done</Text>
+          <Image
+              source={require('../images/done.png')}
+          />
       </TouchableHighlight>
       </View>
     );
