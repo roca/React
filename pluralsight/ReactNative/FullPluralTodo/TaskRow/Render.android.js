@@ -12,6 +12,10 @@ const localStyle = React.StyleSheet.create({
         borderRadius: 5,
         padding: 5,
     },
+    icon: {
+        width: 30,
+        height: 30,
+    },
 });
 
 
@@ -20,7 +24,7 @@ export default function render(styles) {
       <View style={styles.container}>
         <Text
             style={styles.label}
-        >and: {this.props.todo.task}
+        >{this.props.todo.task}
         </Text>
 
       <TouchableHighlight
@@ -30,6 +34,7 @@ export default function render(styles) {
       >
           <Image
               source={require('../images/done.png')}
+              style={localStyle.icon}
           />
       </TouchableHighlight>
       </View>
