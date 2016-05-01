@@ -1,10 +1,8 @@
+import React from 'react-native';
+const {
+    AppRegistry,
+} = React;
 
-import React, {
-  AppRegistry,
- } from 'react-native';
-
-
- import PluralTodo from './PluralTodo';
-
+import PluralTodo from './PluralTodo';
 
 AppRegistry.registerComponent('FullPluralTodo', () => PluralTodo);

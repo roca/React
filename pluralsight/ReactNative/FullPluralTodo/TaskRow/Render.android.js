@@ -5,30 +5,51 @@ const {
   Text,
   TouchableHighlight,
   Image,
+  Animated,
 } = React;
-
-const localStyle = React.StyleSheet.create({
-    doneButton: {
-        borderRadius: 5,
-        padding: 5,
-    },
-    icon: {
-        width: 30,
-        height: 30,
-    },
-});
 
 
 export default function render(styles) {
+    const doneAnimation = new Animated.ValueXY();
+
+    const localStyle = React.StyleSheet.create({
+        doneButton: {
+            borderRadius: 5,
+            padding: 5,
+        },
+        icon: {
+            width: 30,
+            height: 30,
+        },
+        row: {
+            transform: doneAnimation.getTranslateTransform(),
+        },
+    });
+
+    function animatedPress() {
+        Animated.spring(doneAnimation, {
+            tension: 2,
+            friction: 3,
+            toValue: {
+                x: -500,
+                y: 0,
+            },
+        }).start();
+
+        setTimeout(() => {
+            this.onDonePressed();
+        }, 1000);
+    }
+
     return (
-      <View style={styles.container}>
+      <Animated.View style={[styles.container, localStyle.row]}>
         <Text
             style={styles.label}
         >{this.props.todo.task}
         </Text>
 
       <TouchableHighlight
-          onPress={this.onDonePressed.bind(this)}
+          onPress={animatedPress.bind(this)}
           style={localStyle.doneButton}
           underlayColor="#ddd"
       >
@@ -37,6 +58,6 @@ export default function render(styles) {
               style={localStyle.icon}
           />
       </TouchableHighlight>
-      </View>
+    </Animated.View>
     );
 }
