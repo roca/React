@@ -8,7 +8,7 @@ const defaultState = {
     ],
 };
 
-function todoStore(state = defaultState, action) {
+function todoStore(action, state = defaultState) {
     switch (action.type) {
     case 'ADD_TODO':
         return Object.assign({}, state, {
