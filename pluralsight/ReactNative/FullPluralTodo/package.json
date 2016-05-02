@@ -12,6 +12,7 @@
     "eslint-plugin-react": "3.12.0",
     "react": "^0.14.8",
     "react-native": "^0.24.1",
-    "react-native-swipeout": "2.0.12"
+    "react-native-swipeout": "2.0.12",
+    "redux": "^3.5.2"
   }
 }
