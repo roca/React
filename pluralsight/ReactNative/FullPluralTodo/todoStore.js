@@ -6,9 +6,10 @@ const defaultState = {
             task: 'Initial todo in store',
         },
     ],
+    filter: 'pending',
 };
 
-function todoStore(action, state = defaultState) {
+function todoStore(state = defaultState, action) {
     switch (action.type) {
     case 'ADD_TODO':
         return Object.assign({}, state, {
@@ -19,6 +20,11 @@ function todoStore(action, state = defaultState) {
     case 'DONE_TODO':
         return Object.assign({}, state, {
             todos: state.todos.filter(todo => todo !== action.todo),
+        });
+    case 'TOGGLE_STATE':
+        const filter = state.filter === 'pending' ? 'done' : 'pending';
+        return Object.assign({}, state, {
+            filter,
         });
     default:
         return state;
