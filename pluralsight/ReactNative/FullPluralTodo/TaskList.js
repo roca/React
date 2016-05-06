@@ -89,6 +89,7 @@ class TaskList extends React.Component {
             </View>
             <ListView
                 dataSource={this.state.dataSource}
+                enableEmptySections
                 key={this.props.todos}
                 renderRow={this.renderRow.bind(this)}
             />
