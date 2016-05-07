@@ -9,10 +9,12 @@
     "sdkVersion": "4.0.0"
   },
   "dependencies": {
-    "react-native": "github:exponentjs/react-native#2016-01-02",
     "babel-eslint": "4.1.6",
     "eslint": "1.10.3",
     "eslint-config-airbnb": "2.1.1",
-    "eslint-plugin-react": "3.12.0"
+    "eslint-plugin-react": "3.12.0",
+    "react-native": "github:exponentjs/react-native#2016-01-02",
+    "react-native-swipeout": "^2.0.12",
+    "redux": "^3.5.2"
   }
 }
