@@ -9,7 +9,9 @@
     "lint": "node_modules/.bin/esw webpack.config.* src tools",
     "lint:watch": "npm run lint -- --watch",
     "test": "mocha --reporter spec tools/testSetup.js \"src/**/*.test.js\"",
-    "test:watch": "npm run test -- -watch"
+    "test:watch": "npm run test -- -watch",
+    "clean-dist": "npm run remove-dist && mkdir dist",
+    "build.html"
   },
   "author": "Cory House",
   "license": "MIT",
