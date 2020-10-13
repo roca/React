@@ -6,5 +6,5 @@ StephenGrider/AdvancedReduxCode  Course
 
 
 ## Start a project
-npm config set strict-ssl=false
-npx create-react-app testing
+    - npm config set strict-ssl=false
+    - npx create-react-app testing
