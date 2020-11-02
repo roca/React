@@ -20,6 +20,7 @@ it('should have a textarea and a button', () => {
     expect(wrapped.find('button').length).toEqual(1);
 });
 
+
 describe('The textarea ', () =>{
 
     beforeEach(() => {
