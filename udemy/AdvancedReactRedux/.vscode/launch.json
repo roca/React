@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "type": "aws-sam",
+            "request": "direct-invoke",
+            "name": "AdvancedReactRedux:src/actions/FetchCommentActions.fetchComments (nodejs12.x)",
+            "invokeTarget": {
+                "target": "code",
+                "projectRoot": "testing",
+                "lambdaHandler": "src/actions/FetchCommentActions.fetchComments"
+            },
+            "lambda": {
+                "runtime": "nodejs12.x",
+                "payload": {},
+                "environmentVariables": {}
+            }
+        }
+    ]
+}
