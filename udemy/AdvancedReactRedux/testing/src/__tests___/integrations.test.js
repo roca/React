@@ -34,17 +34,25 @@ it('cat fetch a list of comments and dispaly them', (done)  => {
             </BrowserRouter>
         </Root>
     );
+    console.log(wrapped.html());
+    wrapped.find('button#btnSignIn').simulate('click');
+    wrapped.update();
+    console.log(wrapped.html());
+    wrapped.find('a#postLink').simulate('click');
+    wrapped.update();
+    console.log(wrapped.html());
 
     // find the 'fetchComments' button and click it
-    wrapped.find('#fetch-comments').simulate('click');
+    wrapped.find('button#fetch-comments').simulate('click');
+
 
     // Adds a pause
     moxios.wait(() => {
-        wrapped.update()
+        wrapped.update();
 
         // Expect to find a list of comments!
         try {
-            expect(wrapped.find('li').length).toEqual(2);
+            expect(wrapped.find('li').length).toEqual(3);
             console.log('Test Passed');
             done();
         } catch {

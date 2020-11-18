@@ -14,13 +14,13 @@ class App extends Component {
     renderButton() {
         if (this.props.auth) {
             return (
-                <button onClick={() => this.props.changeAuth(false)}>
+                <button id="btnSignIn" onClick={() => this.props.changeAuth(false)}>
                     Sign Out
                 </button>
             );
         } 
         return (
-                <button onClick={() => this.props.changeAuth(true)}>
+                <button id="btnSignIn" onClick={() => this.props.changeAuth(true)}>
                     Sign In
                 </button>
             );
@@ -30,8 +30,8 @@ class App extends Component {
     renderHeader() {
         return (
             <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/post">Post A Comment</Link></li>
+                <li><Link id="homeLink" to="/">Home</Link></li>
+                <li><Link id="postLink" to="/post">Post A Comment</Link></li>
                 <li>{this.renderButton()}</li>
             </ul>
         );

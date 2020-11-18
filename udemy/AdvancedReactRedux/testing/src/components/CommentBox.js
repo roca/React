@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 // import * as actions from 'actions';
 import { saveComment, fetchComments } from 'actions';
+import requireAuth from 'components/requireAuth';
 
 class CommentBox extends Component {
     state = { comment: ''};
@@ -35,4 +36,5 @@ class CommentBox extends Component {
     }
 }
 
-export default connect(null, { saveComment, fetchComments })(CommentBox);
+
+export default connect(null, { saveComment, fetchComments })(requireAuth(CommentBox));
