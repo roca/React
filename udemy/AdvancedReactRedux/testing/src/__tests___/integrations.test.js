@@ -1,6 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import moxios from 'moxios';
+import { BrowserRouter, Route } from 'react-router-dom';
 
 import Root from 'Root';
 import App from 'components/App';
@@ -28,7 +29,9 @@ it('cat fetch a list of comments and dispaly them', (done)  => {
     // Attempt to render the *entire* app
     const wrapped = mount (
         <Root>
-            <App/>
+            <BrowserRouter>
+                <Route path="/" component={App} />
+            </BrowserRouter>
         </Root>
     );
 
