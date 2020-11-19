@@ -11,3 +11,10 @@ StephenGrider/AdvancedReduxCode  Course
 
 ## Random Fake comments
     - https://jsonplaceholder.typicode.com/comments
+
+## Running test
+    - npm run test
+    - CI=true npm run test -- --coverage
+
+## Build
+    - npm run build
