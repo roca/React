@@ -6,6 +6,11 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Root from 'Root';
 import App from 'components/App';
 
+const initialState = {
+    auth: true,
+    comments: ['Comment 1', 'Comment2']
+};
+
 beforeEach(()=>{
     moxios.install();
     moxios.stubRequest('http://jsonplaceholder.typicode.com/comments', {
@@ -28,31 +33,27 @@ it('cat fetch a list of comments and dispaly them', (done)  => {
 
     // Attempt to render the *entire* app
     const wrapped = mount (
-        <Root>
+        <Root initialState={initialState}>
             <BrowserRouter>
                 <Route path="/" component={App} />
             </BrowserRouter>
         </Root>
     );
-    console.log(wrapped.html());
-    wrapped.find('button#btnSignIn').simulate('click');
-    wrapped.update();
-    console.log(wrapped.html());
-    wrapped.find('a#postLink').simulate('click');
-    wrapped.update();
-    console.log(wrapped.html());
-
+    // wrapped.find('button#btnSignIn').simulate('click');
+    wrapped.find('a#postLink').simulate('click', { button: 0 });
     // find the 'fetchComments' button and click it
     wrapped.find('button#fetch-comments').simulate('click');
+    wrapped.find('a#homeLink').simulate('click', { button: 0 });
 
 
     // Adds a pause
     moxios.wait(() => {
         wrapped.update();
+        // console.log(wrapped.html());
 
         // Expect to find a list of comments!
         try {
-            expect(wrapped.find('li').length).toEqual(3);
+            expect(wrapped.find('li.comments').length).toEqual(4);
             console.log('Test Passed');
             done();
         } catch {

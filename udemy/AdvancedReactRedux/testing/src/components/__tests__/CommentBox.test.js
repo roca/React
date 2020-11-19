@@ -8,7 +8,14 @@ import CommentBox from 'components/CommentBox';
 let wrapped, mockEvent;
 
 beforeEach(() => {
-    wrapped = mount(<Root><CommentBox /></Root>);
+    const initialState = {
+       auth: true
+    };
+    wrapped = mount(
+        <Root initialState={initialState}>
+            <CommentBox />
+        </Root>
+    );
 });
 
 afterEach(() => {
