@@ -31,7 +31,7 @@ class App extends Component {
         return (
             <ul>
                 <li><Link id="homeLink" to="/">Home</Link></li>
-                <li><Link id="postLink" to="/post">Post A Comment</Link></li>
+                <li><Link id="postLink" to="/post">Post a comment</Link></li>
                 <li>{this.renderButton()}</li>
             </ul>
         );
