@@ -18,3 +18,7 @@ StephenGrider/AdvancedReduxCode  Course
 
 ## Build
     - npm run build
+
+## Prettier
+    - npx prettier --check "**/*.js"
+    - npx prettier --write "**/*.js"
