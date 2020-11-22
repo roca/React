@@ -16,6 +16,7 @@ jobs:
         with:
           node-version: "12.x"
       - run: cd udemy/AdvancedReactRedux/testing
+      - run: ls -l
       - run: npm ci
       - run: npm run format:check
       - run: npm test -- --coverage
