@@ -16,10 +16,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: "12.x"
-      - run: cd udemy/AdvancedReactRedux/testing/ && npm ci
-      - run: cd udemy/AdvancedReactRedux/testing/ && npm run format:check
-      - run: cd udemy/AdvancedReactRedux/testing/ && npm test -- --coverage
+      - run: cd $PROJECT_HOME && npm ci
+      - run: cd $PROJECT_HOME && npm run format:check
+      - run: cd $PROJECT_HOME && npm test -- --coverage
         env:
           CI: true
+          PROJECT_HOME: udemy/AdvancedReactRedux/testing/
 
             
