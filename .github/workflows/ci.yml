@@ -16,6 +16,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: "12.x"
+      - run: pwd
       - run: cd udemy/AdvancedReactRedux/testing/ && npm ci
       - run: cd udemy/AdvancedReactRedux/testing/ && npm run format:check
       - run: cd udemy/AdvancedReactRedux/testing/ && npm test -- --coverage
