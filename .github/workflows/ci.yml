@@ -14,6 +14,8 @@ on:
 
 jobs:
   build:
+    env:
+      PROJECT_PATH: udemy/AdvancedReactRedux/testing/
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -22,17 +24,17 @@ jobs:
         with:
           node-version: "12.x"
       - run: pwd
-      - run: cd udemy/AdvancedReactRedux/testing/ && npm ci
-      - run: cd udemy/AdvancedReactRedux/testing/ && npm run format:check
-      - run: cd udemy/AdvancedReactRedux/testing/ && npm test -- --coverage
+      - run: cd $PROJECT_PATH && npm ci
+      - run: cd $PROJECT_PATH && npm run format:check
+      - run: cd $PROJECT_PATH && npm test -- --coverage
         env:
           CI: true
       - name: Build Project
         if: github.event_name == 'push'
-        run: cd udemy/AdvancedReactRedux/testing/ && npm run build
+        run: cd $PROJECT_PATH && npm run build
       - name: Deploy to Staging
         if: github.event_name == 'push'
-        run: cd udemy/AdvancedReactRedux/testing/ && npx surge --project ./build --domain desertfoxdev.surge.sh
+        run: cd $PROJECT_PATH && npx surge --project ./build --domain desertfoxdev.surge.sh
         env:
           SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
