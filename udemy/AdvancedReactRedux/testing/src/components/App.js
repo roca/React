@@ -10,8 +10,8 @@ import { changeAuth } from "actions";
 
 class App extends Component {
   renderBranch() {
-    if (process.env.REACT_APP_GIT_BRANCH != 'master') {
-      return (<h2>GIT_BRANCH:{process.env.REACT_APP_GIT_BRANCH}</h2>);
+    if (process.env.REACT_APP_GIT_BRANCH != "master") {
+      return <h2>GIT_BRANCH:{process.env.REACT_APP_GIT_BRANCH}</h2>;
     }
   }
   renderButton() {
