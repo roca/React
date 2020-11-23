@@ -6,6 +6,11 @@ on:
     paths:
       - .github/**
       - 'udemy/AdvancedReactRedux/**'
+  push:
+    branches: [develop]
+    paths:
+      - .github/**
+      - 'udemy/AdvancedReactRedux/**'
 
 jobs:
   build:
@@ -22,5 +27,14 @@ jobs:
       - run: cd udemy/AdvancedReactRedux/testing/ && npm test -- --coverage
         env:
           CI: true
+      - name: Build Project
+        if: github.event_name == 'push'
+        run: cd udemy/AdvancedReactRedux/testing/ && npm run build
+      - name: Deploy to Staging
+        if: github.event_name == 'push'
+        run: cd udemy/AdvancedReactRedux/testing/ && npx surge --project ./build --domain desertfoxdev.surge.sh
+        env:
+          SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
 
             
