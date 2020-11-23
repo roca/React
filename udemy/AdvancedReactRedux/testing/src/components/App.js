@@ -9,6 +9,11 @@ import CommentList from "components/CommentList";
 import { changeAuth } from "actions";
 
 class App extends Component {
+  renderBranch() {
+    if (process.env.REACT_APP_GIT_BRANCH != "master") {
+      return <h2>GIT_BRANCH:{process.env.REACT_APP_GIT_BRANCH}</h2>;
+    }
+  }
   renderButton() {
     if (this.props.auth) {
       return (
@@ -26,25 +31,28 @@ class App extends Component {
 
   renderHeader() {
     return (
-      <ul>
-        <li>
-          <Link id="homeLink" to="/">
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link id="postLink" to="/post">
-            Post a comment
-          </Link>
-        </li>
-        <li>{this.renderButton()}</li>
-      </ul>
+      <div>
+        <ul>
+          <li>
+            <Link id="homeLink" to="/">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link id="postLink" to="/post">
+              Post a comment
+            </Link>
+          </li>
+          <li>{this.renderButton()}</li>
+        </ul>
+      </div>
     );
   }
 
   render() {
     return (
       <div>
+        {this.renderBranch()}
         {this.renderHeader()}
         <Route path="/post" component={CommentBox} />
         <Route path="/" exact component={CommentList} />
