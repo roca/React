@@ -7,6 +7,7 @@ import App from "components/App";
 
 ReactDOM.render(
   <Root>
+    <h1>Development</h1>
     <BrowserRouter>
       <Route path="/" component={App} />
     </BrowserRouter>
