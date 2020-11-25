@@ -34,7 +34,7 @@ jobs:
       - run: cd $PROJECT_PATH && ./bin/setBranchName.sh
       - run: cd $PROJECT_PATH && npm ci
       - run: cd $PROJECT_PATH && npm run format:check
-      - run: cd $PROJECT_PATH && npm test -- --coverage
+      - run: cd $PROJECT_PATH && npm run test -- --coverage
         env:
           CI: true
       - name: Upload Test Coverage
