@@ -22,3 +22,9 @@ StephenGrider/AdvancedReduxCode  Course
 ## Prettier
     - npx prettier --check "**/*.js"
     - npx prettier --write "**/*.js"
+
+## JSOM Schema
+    - https://json-schema.org/
+    - https://jsonschema.net/
+# Semantic Release
+    - https://semantic-release.gitbook.io/semantic-release/
