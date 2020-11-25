@@ -31,6 +31,7 @@ jobs:
         with:
           node-version: "12.x"
       - run: pwd
+      - run: cd $PROJECT_PATH && ./bin/setBranchName.sh
       - run: cd $PROJECT_PATH && npm ci
       - run: cd $PROJECT_PATH && npm run format:check
       - run: cd $PROJECT_PATH && npm test -- --coverage
@@ -50,6 +51,11 @@ jobs:
         with:
           name: build
           path: ${{env.PROJECT_PATH}}/build
+      - name: ZIP assets
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        run: |
+          cd $PROJECT_PATH && zip -r build.zip ./build
+          cd $PROJECT_PATH && zip -r coverage.zip ./coverage
       - name: Create a Release
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         run: cd $PROJECT_PATH && npx semantic-release
