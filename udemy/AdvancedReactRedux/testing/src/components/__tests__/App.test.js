@@ -27,3 +27,9 @@ beforeEach(() => {
 it("should have a CommentList", () => {
   expect(wrapped.find(CommentList).length).toEqual(1);
 });
+
+it("it should have the REACT_APP_GIT_BRANCH name in title", () => {
+  expect(process.env.REACT_APP_GIT_BRANCH).not.toBe(undefined);
+  expect(wrapped.find("h2").length).toEqual(1);
+  expect(wrapped.find("h2").text()).toEqual("GIT_BRANCH:" + process.env.REACT_APP_GIT_BRANCH);
+});

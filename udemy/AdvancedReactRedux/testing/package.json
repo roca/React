@@ -19,6 +19,9 @@
     "redux-promise": "^0.6.0"
   },
   "scripts": {
+    "prestart": "./bin/setBranchName.sh",
+    "pretest": "./bin/setBranchName.sh",
+    "prebuild": "./bin/setBranchName.sh",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
