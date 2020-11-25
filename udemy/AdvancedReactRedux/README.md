@@ -26,3 +26,5 @@ StephenGrider/AdvancedReduxCode  Course
 ## JSOM Schema
     - https://json-schema.org/
     - https://jsonschema.net/
+# Semantic Release
+    - https://semantic-release.gitbook.io/semantic-release/
