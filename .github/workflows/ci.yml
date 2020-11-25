@@ -36,9 +36,20 @@ jobs:
       - run: cd $PROJECT_PATH && npm test -- --coverage
         env:
           CI: true
+      - name: Upload Test Coverage
+        uses: actions/upload-artifacts@v1
+        with:
+          name: code-coverage
+          path: coverage
       - name: Build Project
         if: github.event_name == 'push'
         run: cd $PROJECT_PATH && npm run build
+      - name: Upload Build
+        if: github.event_name == 'push'
+        uses: actions/upload-artifacts@v1
+        with:
+          name: build
+          path: build
       - name: Deploy to Staging
         if: github.event_name == 'push'
         run: cd $PROJECT_PATH && npx surge --project ./build --domain desertfoxdev.surge.sh
