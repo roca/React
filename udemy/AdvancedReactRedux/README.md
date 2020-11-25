@@ -22,3 +22,7 @@ StephenGrider/AdvancedReduxCode  Course
 ## Prettier
     - npx prettier --check "**/*.js"
     - npx prettier --write "**/*.js"
+
+## JSOM Schema
+    - https://json-schema.org/
+    - https://jsonschema.net/
