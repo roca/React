@@ -28,3 +28,6 @@ StephenGrider/AdvancedReduxCode  Course
     - https://jsonschema.net/
 # Semantic Release
     - https://semantic-release.gitbook.io/semantic-release/
+
+## Lint commit messages
+    - https://github.com/conventional-changelog/commitlint
