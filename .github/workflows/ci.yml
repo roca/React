@@ -53,8 +53,7 @@ jobs:
       - name: ZIP assets
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         run: |
-          cd $PROJECT_PATH && zip -r build.zip ./build
-          cd $PROJECT_PATH && zip -r coverage.zip ./coverage
+          cd $PROJECT_PATH && zip -r build.zip ./build && zip -r coverage.zip ./coverage
       - name: Create a Release
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         run: cd $PROJECT_PATH && npx semantic-release
