@@ -32,8 +32,8 @@ it("it should have the REACT_APP_GIT_BRANCH name in title", () => {
   expect(process.env.REACT_APP_GIT_BRANCH).not.toBe(undefined);
   if (process.env.REACT_APP_GIT_BRANCH !== "master") {
     expect(wrapped.find("h2").length).toEqual(1);
+    expect(wrapped.find("h2").text()).toEqual("GIT_BRANCH:" + process.env.REACT_APP_GIT_BRANCH);
   } else {
     expect(wrapped.find("h2").length).toEqual(0);
   }
-  expect(wrapped.find("h2").text()).toEqual("GIT_BRANCH:" + process.env.REACT_APP_GIT_BRANCH);
 });
