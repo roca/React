@@ -6,7 +6,7 @@ ENV PORT=3090
 COPY . /var/www
 WORKDIR /var/www
 
-RUN npm install
+RUN npm install --silent
 
 EXPOSE $PORT
 
