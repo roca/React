@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+    node:
+      build:
+          context: .
+          dockerfile: node.dockerfile
+      ports:
+          - "3090:3090"
+      networks:
+          - server-network
+    mongodb:
+        image: mongo
+        ports:
+            - "27018:27017"
+        networks:
+            - server-network
+        environment:
+          MONGO_INITDB_ROOT_USERNAME: root
+          MONGO_INITDB_ROOT_PASSWORD: example
+
+networks:
+    server-network:
+        driver: bridge
+
