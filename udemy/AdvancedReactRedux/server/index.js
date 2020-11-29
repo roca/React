@@ -8,7 +8,8 @@ const mongoose = require('mongoose');
 const router = require('./router');
 
 // DB Setup
-mongoose.connect('mongodb://mongo:27017/auth');
+// Use these option to elemenate deprication warnings. { useNewUrlParser: true, useUnifiedTopology: true , useCreateIndex: true}
+mongoose.connect('mongodb://mongo:27017/auth', { useNewUrlParser: true, useUnifiedTopology: true , useCreateIndex: true});
 
 // App setup
 const app = express();
