@@ -62,7 +62,7 @@
   },
   "config": {
     "commitizen": {
-      "path": "/Users/romelcampbell/GitHub/Repos/React/udemy/AdvancedReactRedux/testing/node_modules/cz-conventional-changelog"
+      "path": "/usr/local/lib/node_modules/cz-conventional-changelog"
     }
   }
 }
