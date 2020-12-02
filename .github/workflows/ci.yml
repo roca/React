@@ -5,12 +5,12 @@ on:
     branches: [develop, master]
     paths:
       - .github/**
-      - 'udemy/AdvancedReactRedux/**'
+      - 'udemy/AdvancedReactRedux/testing/**'
   push:
     branches: [develop, master]
     paths:
       - .github/**
-      - 'udemy/AdvancedReactRedux/**'
+      - 'udemy/AdvancedReactRedux/testing/**'
 
 jobs:
   build:
