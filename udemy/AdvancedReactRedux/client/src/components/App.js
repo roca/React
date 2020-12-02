@@ -1,12 +1,13 @@
+/* eslint-disable import/no-anonymous-default-export */
 import React from "react";
 
 import Header from "./Header";
 
-export default () => {
+export default ({ children }) => {
   return (
     <div>
       <Header />
-      Hi, im the app
+      {children}
     </div>
   );
 };
