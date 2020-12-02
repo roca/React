@@ -1,13 +1,11 @@
 version: '2'
 
 services:
-    client:
-        container_name: client
+    testing:
+        container_name: testing
         build:
             context: ./testing
             dockerfile: node.dockerfile
-        depends_on:
-            - server
         ports:
             - "3001:3000"
         working_dir: /var/www
@@ -16,6 +14,21 @@ services:
         #     bash -c "npm run start"
         volumes:
           - ./testing:/var/www
+    client:
+        container_name: client
+        build:
+            context: ./client
+            dockerfile: node.dockerfile
+        depends_on:
+            - server
+        ports:
+            - "3002:3000"
+        working_dir: /var/www
+        stdin_open: true
+        # command: >
+        #     bash -c "npm run start"
+        volumes:
+          - ./client:/var/www
     server:
         container_name: server
         build:
