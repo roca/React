@@ -35,3 +35,6 @@ StephenGrider/AdvancedReduxCode  Course
 ## Dockerizing a React App
     - https://mherman.org/blog/dockerizing-a-react-app/
     - Docker React App: 404s will fallback to / (https://stackoverflow.com/questions/61506475/docker-react-app-404s-will-fallback-to)
+
+## An elegant solution of deploying React app into a subdirectory
+    - https://skryvets.com/blog/2018/09/20/an-elegant-solution-of-deploying-react-app-into-a-subdirectory/
