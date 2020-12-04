@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
-import React from "react";
+import React from 'react';
 
-import Header from "./Header";
+import Header from './Header';
 
 export default ({ children }) => {
   return (
