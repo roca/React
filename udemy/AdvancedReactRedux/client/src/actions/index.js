@@ -1,1 +1,1 @@
-export * from "actions/SignupActions";
+export * from 'actions/SignupActions';

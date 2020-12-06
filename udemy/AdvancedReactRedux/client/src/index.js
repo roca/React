@@ -18,7 +18,7 @@ export const history = createBrowserHistory({
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
 ReactDOM.render(
-  <Provider store={ store }>
+  <Provider store={store}>
     <BrowserRouter basename="/dev">
       <App>
         <Route path="/" exact component={Welcome} />
