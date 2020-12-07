@@ -1,6 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 export default ChildComponent => {
   class ComposedComponent extends Component {
@@ -14,7 +14,7 @@ export default ChildComponent => {
     }
     shouldNavigateAway() {
       if (!this.props.auth) {
-        this.props.history.push("/");
+        this.props.history.push('/');
       }
     }
 

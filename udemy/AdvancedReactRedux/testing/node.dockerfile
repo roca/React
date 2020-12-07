@@ -15,4 +15,4 @@ RUN npm install --silent
 
 EXPOSE $PORT
 
-CMD ["npm", "run", "start"]
+CMD ["tail", "-f", "/dev/null"]
