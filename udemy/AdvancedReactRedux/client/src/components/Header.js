@@ -26,7 +26,7 @@ class Header extends Component {
     return (
       <div className="header">
         <Link to="/">Redux Auth</Link>
-        { this.renderLinks() }
+        {this.renderLinks()}
       </div>
     );
   }
