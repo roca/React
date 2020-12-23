@@ -1,0 +1,1 @@
+{"version":3,"sources":["styles.css"],"names":[],"mappings":"AAAA,KACI,sBAAuB,CACvB,iBACF,CACA,KACE,wBACF","file":"main.f1764768.chunk.css","sourcesContent":[".App {\n    font-family: sans-serif;\n    text-align: center;\n  }\n  body {\n    background-color: goldenrod;\n  }\n  "]}
