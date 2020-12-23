@@ -13,7 +13,7 @@ const initialState = {
 
 beforeEach(() => {
   moxios.install();
-  moxios.stubRequest("http://jsonplaceholder.typicode.com/comments", {
+  moxios.stubRequest(/.*\/comments/, {
     status: 200,
     response: [{ name: "Fetched #1" }, { name: "Fetched #2" }]
   });
@@ -28,7 +28,7 @@ const myDone = () => {
   return;
 };
 
-it("cat fetch a list of comments and dispaly them", done => {
+it("can fetch a list of comments and dispaly them", done => {
   // Attempt to render the *entire* app
   const wrapped = mount(
     <Root initialState={initialState}>
@@ -46,7 +46,7 @@ it("cat fetch a list of comments and dispaly them", done => {
   // Adds a pause
   moxios.wait(() => {
     wrapped.update();
-    // console.log(wrapped.html());
+    console.log(wrapped.html());
 
     // Expect to find a list of comments!
     try {
