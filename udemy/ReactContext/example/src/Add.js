@@ -1,13 +1,13 @@
 import React,  { useContext }  from 'react';
 
-import { CtxNum } from './App';
+import { CtxPlusNum } from './App';
 
 function Add() {
 
-    const contextFunc = useContext(CtxNum);
+    const contextFunc = useContext(CtxPlusNum);
 
     return <>
-        <button onClick={contextFunc.plus}> + </button>
+        <button onClick={contextFunc}> + </button>
     </>
 }
 

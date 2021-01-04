@@ -7,9 +7,15 @@ import Add from './Add';
 
 const CtxNum = createContext();
 
+const CtxPlusNum = createContext();
+
+const CtxMinusNum = createContext();
+
 export default function App() {
 
     const [number, setnumber] = useState(0)
+
+    const [auth, setAuth]  = useState({ username: "bbalals"})
 
     function minus() {
         setnumber(number <= 0 ? 0 : number - 1);
@@ -23,13 +29,19 @@ export default function App() {
 
     return (
         <div className="App">
-            <CtxNum.Provider value={ values}>
+            <CtxNum.Provider value={ number }>
                 <Number />
-                <Minus />
-                <Add />
             </CtxNum.Provider>
+
+            <CtxMinusNum.Provider value={ minus }>
+                <Minus />
+            </CtxMinusNum.Provider>
+
+            <CtxPlusNum.Provider value={ plus} >
+                <Add />
+            </CtxPlusNum.Provider>
         </div>
     )
 }
 
-export { CtxNum };
+export { CtxNum, CtxMinusNum, CtxPlusNum };

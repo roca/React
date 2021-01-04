@@ -1,13 +1,13 @@
 import React,  { useContext }  from 'react';
 
-import { CtxNum } from './App';
+import { CtxMinusNum } from './App';
 
 function Minus() {
-    const contextFunc = useContext(CtxNum);
+    const contextFunc = useContext(CtxMinusNum);
 
     return <>
         <button onClick={ () => {
-            contextFunc.minus();
+            contextFunc();
         } }> - </button>
     </>
 }
